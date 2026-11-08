@@ -10,8 +10,6 @@ Each activation layer learns only three scalars, $a$, $w$ and $b$. With $p_0 = 1
 
 This repository contains the full implementation, the complete experiment record and the analysis behind the paper. Every number below is regenerated from the stored records.
 
-> **Paper:** *Adaptive Power Units: Learning Bounded, Input-Dependent Activation Functions for Image Classification.* Under review.
-
 ## Highlights
 
 - **Learning the exponent pays off.** Full APU improves on its own frozen starting shape by **3.60 points on CIFAR-10** and **4.57 points on CIFAR-100** (both p < 0.001). With identical optimizer settings, the gain is 3.86 points.
