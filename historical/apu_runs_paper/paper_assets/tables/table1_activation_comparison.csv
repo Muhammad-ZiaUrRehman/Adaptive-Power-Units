@@ -1,0 +1,11 @@
+Activation,Formulation,Learnable params,Input-conditioned,Adaptation granularity,Compute
+ReLU,"max(0, z)",0,No,-,1 compare
+LeakyReLU,z if z>0 else 0.01 z,0,No,-,1 compare + 1 mul
+PReLU,z if z>0 else a z,1 per layer,No,layer (learned),1 compare + 1 mul
+GELU,z * Phi(z),0,No,-,erf
+SiLU,z * sigmoid(z),0,No,-,exp + div
+Mish,z * tanh(softplus(z)),0,No,-,"exp, log, tanh"
+ESReLU,z if z>0 else 0.1 (exp(-z^2) - 1),0,No,-,exp
+Fixed power (p=2),z (z^2+eps)^((p-1)/2),0,No,-,pow
+Learned constant p,"same, p = bounded learned scalar",1 per layer,No,layer,pow + sigmoid
+APU (ours),"z (z^2+eps)^((p(z)-1)/2), p(z)=p0+A tanh(w_z z+b_z)",3 per layer (or per channel),Yes (per element),layer / channel,tanh + pow

@@ -1,0 +1,21 @@
+{
+  "applied": [
+    "E"
+  ],
+  "cost_overhead_pct": 101.92982175142214,
+  "extensions_triggered": false,
+  "stage1": {
+    "beats_adaptive": false,
+    "beats_frozen": true,
+    "beats_standard": false,
+    "primary_diff": 3.604000000000002,
+    "similar_to_frozen": false
+  },
+  "stage2": {
+    "beats_adaptive": false,
+    "beats_frozen": true,
+    "beats_standard": true,
+    "primary_diff": 4.5699999999999985,
+    "similar_to_frozen": false
+  }
+}

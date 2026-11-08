@@ -1,0 +1,6 @@
+item,quoted,recovered
+SimpleCNN CIFAR-10 APU mean,83.326,83.326
+SimpleCNN CIFAR-10 GELU mean,82.53,82.53
+APU - GELU,0.796,0.796
+SimpleCNN APU learned activation parameters,9.0,9.0
+ResNet-18 CIFAR-10 epoch time APU/ReLU - 1 (%),39.0,39.2039

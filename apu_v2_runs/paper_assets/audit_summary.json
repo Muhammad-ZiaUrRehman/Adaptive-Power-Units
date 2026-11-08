@@ -1,0 +1,86 @@
+{
+  "cifar100_shallow": {
+    "files": [],
+    "inspected": false,
+    "output_text_mentions": 0,
+    "result_runs": 0
+  },
+  "created": "2026-10-31T17:19:44",
+  "historical_source_revision": {
+    "git": "unavailable",
+    "notebook_sha256": "d1a6bc46b2b645b7a286f70016c53b970e97ca9cabf89c557a9fb613e0f6e42b"
+  },
+  "n_corrections": 1,
+  "preact_range": {
+    "max": 98.97650146484375,
+    "min": -79.7750015258789,
+    "n_layers": 230,
+    "q001": -41.063297271728516,
+    "q999": 34.06331253051758,
+    "source": "historical analysis/exp_*.pt (sampled pre-activations of trained APU models)"
+  },
+  "reconciliation": [
+    {
+      "matches": true,
+      "quantity": "distinct classification jobs",
+      "recovered": 483,
+      "reported_in_plan": 483
+    },
+    {
+      "matches": true,
+      "quantity": "completed classification jobs",
+      "recovered": 464,
+      "reported_in_plan": 464
+    },
+    {
+      "matches": true,
+      "quantity": "failed (diverged) classification jobs",
+      "recovered": 19,
+      "reported_in_plan": 19
+    },
+    {
+      "matches": true,
+      "quantity": "completed non-holdout jobs",
+      "recovered": 404,
+      "reported_in_plan": 404
+    }
+  ],
+  "secondary": {
+    "corruption": {
+      "corruption_types": [
+        "brightness",
+        "contrast",
+        "gaussian_blur",
+        "gaussian_noise",
+        "impulse_noise",
+        "pixelate",
+        "shot_noise",
+        "speckle_noise"
+      ],
+      "label": "8 re-implemented corruption types; not the official CIFAR-10-C / CIFAR-100-C benchmark",
+      "n_types": 8,
+      "sources": [
+        "reimplemented-subset"
+      ]
+    },
+    "gan": {
+      "generated_samples_per_score": 4864,
+      "metric": "Frechet distance in the feature space of a small classifier trained on the real data (NOT Inception-based FID)",
+      "n_runs": 96,
+      "real_feature_samples": 5000
+    },
+    "pgd_files": [
+      "pgd_cifar100_resnet18.csv",
+      "pgd_cifar10_resnet18.csv"
+    ]
+  },
+  "settings": 13,
+  "status_note": "historical numbers are exploratory evidence; they were inspected on the test set and are not re-used for selection",
+  "unavailable": [
+    "per-run split index checksums (historical runs used a holdout permutation, not a recorded split file)",
+    "per-run source revision (no version control)",
+    "per-run configuration digests"
+  ],
+  "unreadable_files": [],
+  "wins": 1
+}

@@ -1,0 +1,2 @@
+source,item,saved,recovered,abs_diff,note
+table2_main_results.csv,cifar100/resnet18 rows,"apu_const, apu_fixed, apu_linear, apu_sigmoid",ablation-only variants,,Table 2 mixes ablation variants into the main comparison; v2 reports them separately

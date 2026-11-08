@@ -1,0 +1,11 @@
+scope,distinct_jobs,completed,failed
+all classification jobs,483,464,19
+non-holdout (test-evaluated) jobs,414,404,10
+holdout jobs (pilot + LR sweep),69,60,9
+stage: pilot,42,33,9
+stage: lrsweep,36,36,0
+stage: main,200,200,0
+stage: ablation,30,20,10
+stage: tiny,50,50,0
+stage: supp,144,144,0
+jobs shared by two stages,19,19,0

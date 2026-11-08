@@ -1,0 +1,228 @@
+{
+  "env": {
+    "date": "2026-10-21T17:41:59",
+    "python": "3.12.10",
+    "torch": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "cuda": "12.8",
+    "cudnn": 91900,
+    "device": "cuda",
+    "gpu": "NVIDIA GeForce RTX 5070",
+    "n_gpu": 1,
+    "platform": "Windows-11-10.0.26200-SP0",
+    "cpu_count": 32,
+    "profile": "local",
+    "seeds_used": {
+      "pilot": [
+        0,
+        1,
+        2
+      ],
+      "lrsweep": [
+        0,
+        1,
+        2
+      ],
+      "main": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "ablation": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "tiny": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "imagenet": [
+        0
+      ],
+      "supp": [
+        0,
+        1,
+        2
+      ],
+      "gan": [
+        0,
+        1,
+        2
+      ]
+    }
+  },
+  "profile": {
+    "fake": false,
+    "n_train": null,
+    "n_val": null,
+    "workers": 0,
+    "width": 64,
+    "compile": true,
+    "amp": true,
+    "batch": 128,
+    "pilot": {
+      "epochs": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    "lrsweep": {
+      "epochs": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    "main": {
+      "epochs": 200,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "ablation": {
+      "epochs": 200,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "tiny": {
+      "epochs": 100,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "imagenet": {
+      "epochs": 90,
+      "seeds": [
+        0
+      ],
+      "batch": 128
+    },
+    "supp": {
+      "epochs": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ]
+    },
+    "gan": {
+      "epochs": 100,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "batch": 64,
+      "n_eval": 5000
+    },
+    "main_grid": [
+      [
+        "cifar10",
+        "resnet18"
+      ],
+      [
+        "cifar100",
+        "resnet18"
+      ],
+      [
+        "cifar10",
+        "vit_tiny"
+      ],
+      [
+        "cifar100",
+        "vit_tiny"
+      ],
+      [
+        "cifar10",
+        "simplecnn"
+      ]
+    ],
+    "tiny_grid": [
+      [
+        "tinyimagenet",
+        "resnet18"
+      ],
+      [
+        "tinyimagenet",
+        "vit_tiny"
+      ]
+    ],
+    "imagenet_grid": [],
+    "supp_grid": [
+      [
+        "mnist",
+        "simplecnn"
+      ],
+      [
+        "mnist",
+        "resnet18"
+      ],
+      [
+        "mnist",
+        "vit_tiny"
+      ],
+      [
+        "emnist",
+        "simplecnn"
+      ],
+      [
+        "emnist",
+        "resnet18"
+      ],
+      [
+        "emnist",
+        "vit_tiny"
+      ]
+    ],
+    "gan_datasets": [
+      "mnist",
+      "emnist"
+    ],
+    "gan_archs": [
+      "mlp",
+      "dcgan"
+    ],
+    "robust_grid": [
+      [
+        "cifar10",
+        "resnet18"
+      ],
+      [
+        "cifar100",
+        "resnet18"
+      ]
+    ]
+  },
+  "APU_DEFAULT": {
+    "p0": 1.0,
+    "a_max": 0.5,
+    "init_A": 0.3,
+    "init_wz": 0.5
+  }
+}

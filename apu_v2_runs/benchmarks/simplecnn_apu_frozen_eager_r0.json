@@ -1,0 +1,127 @@
+{
+  "compile_outcome": "eager",
+  "env": {
+    "bf16_supported": true,
+    "cpu": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "cpu_count": 32,
+    "cublas_workspace_config": ":4096:8",
+    "cuda": "12.8",
+    "cuda_available": true,
+    "cudnn": 91900,
+    "cudnn_benchmark": false,
+    "cudnn_deterministic": true,
+    "date": "2026-11-02T03:57:35",
+    "deterministic_algorithms": true,
+    "deterministic_mode": null,
+    "deterministic_warn_only": true,
+    "driver": "610.88",
+    "executable": "C:\\Users\\ziaur\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "gpu": "NVIDIA GeForce RTX 5070",
+    "gpu_capability": [
+      12,
+      0
+    ],
+    "gpu_mem_gb": 11.94,
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.10",
+    "ram_gb": 63.8,
+    "scipy": "1.18.1",
+    "torch": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128"
+  },
+  "params": {
+    "activation_total": 9,
+    "activation_trainable": 0,
+    "backbone": 1626442,
+    "n_activation_modules": 3,
+    "total": 1626451,
+    "trainable": 1626442
+  },
+  "results": {
+    "epoch_end_to_end": {
+      "n_train": 45000,
+      "peak_mem_mb": 632.58837890625,
+      "peak_mem_scope": "training epochs incl. GPU data pipeline and augmentation",
+      "s": {
+        "blocks": 2,
+        "max": 2.630089399870485,
+        "median": 2.578006749972701,
+        "min": 2.525924100074917,
+        "q25": 2.551965425023809,
+        "q75": 2.604048074921593
+      }
+    },
+    "inference_bs1": {
+      "first_call_s": 0.1487720012664795,
+      "ms": {
+        "blocks": 7,
+        "max": 1.8991066608577967,
+        "median": 1.296756664911906,
+        "min": 0.9555633335063854,
+        "q25": 1.1828450059207776,
+        "q75": 1.3384300012451908
+      },
+      "peak_mem_mb": 42.3505859375,
+      "peak_mem_scope": "inference batch 1, no_grad, eval mode"
+    },
+    "inference_bs128": {
+      "first_call_s": 0.016000986099243164,
+      "ms": {
+        "blocks": 7,
+        "max": 2.5173599986980357,
+        "median": 1.9486333321159084,
+        "min": 1.4775500011940796,
+        "q25": 1.7824000019269683,
+        "q75": 2.18422666269665
+      },
+      "peak_mem_mb": 175.498046875,
+      "peak_mem_scope": "inference batch 128, no_grad, eval mode"
+    },
+    "train_step": {
+      "first_call_s": 0.22733354568481445,
+      "ms": {
+        "blocks": 7,
+        "max": 7.977900002151728,
+        "median": 6.339383327091734,
+        "min": 5.987023329362273,
+        "q25": 6.139219998537253,
+        "q75": 6.807423336431384
+      },
+      "peak_mem_mb": 494.91796875,
+      "peak_mem_scope": "full training step batch 128 with adamw"
+    }
+  },
+  "spec": {
+    "act": "apu_frozen",
+    "batch": 128,
+    "blocks": 7,
+    "data_dir": "C:\\Users\\ziaur\\Downloads\\APU_Final2\\data",
+    "dataset": "cifar10",
+    "deterministic": true,
+    "device": "cuda",
+    "epoch_reps": 2,
+    "iters_per_block": 30,
+    "mode": "eager",
+    "model": {
+      "arch": "simplecnn",
+      "depth": 2
+    },
+    "optimizer": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "lr": 0.001,
+      "name": "adamw",
+      "weight_decay": 0.0001
+    },
+    "precision": "bf16-autocast",
+    "split_json": "C:\\Users\\ziaur\\Downloads\\APU_Final2\\apu_v2_runs\\splits\\cifar10_d3959a1645b8a7d2.json",
+    "train_limit": null,
+    "warmup": 20
+  },
+  "status": "completed"
+}

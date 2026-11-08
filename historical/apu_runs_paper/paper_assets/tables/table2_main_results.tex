@@ -1,0 +1,108 @@
+\begin{tabular}{lllrrll}
+\toprule
+dataset & arch & act & n_seeds & diverged & top1 & top5 \\
+\midrule
+tinyimagenet & resnet18 & apu & 5 & 0 & 58.87 ± 0.34 & 80.55 ± 0.37 \\
+tinyimagenet & resnet18 & gelu & 5 & 0 & 62.41 ± 0.24 & 82.64 ± 0.20 \\
+tinyimagenet & resnet18 & mish & 5 & 0 & 62.42 ± 0.17 & 82.66 ± 0.13 \\
+tinyimagenet & resnet18 & relu & 5 & 0 & 62.14 ± 0.25 & 82.65 ± 0.22 \\
+tinyimagenet & resnet18 & silu & 5 & 0 & 62.88 ± 0.15 & 82.98 ± 0.17 \\
+tinyimagenet & vit_tiny & apu & 5 & 0 & 36.90 ± 0.41 & 60.66 ± 0.43 \\
+tinyimagenet & vit_tiny & gelu & 5 & 0 & 37.96 ± 0.47 & 55.03 ± 0.55 \\
+tinyimagenet & vit_tiny & mish & 5 & 0 & 39.67 ± 0.47 & 59.80 ± 0.65 \\
+tinyimagenet & vit_tiny & relu & 5 & 0 & 39.91 ± 0.46 & 58.13 ± 0.55 \\
+tinyimagenet & vit_tiny & silu & 5 & 0 & 39.73 ± 0.16 & 60.29 ± 0.38 \\
+cifar100 & resnet18 & apu & 5 & 0 & 75.40 ± 0.48 & - \\
+cifar100 & resnet18 & apu_const & 5 & 0 & 73.45 ± 0.20 & - \\
+cifar100 & resnet18 & apu_fixed & 5 & 5 & diverged & - \\
+cifar100 & resnet18 & apu_linear & 5 & 5 & diverged & - \\
+cifar100 & resnet18 & apu_sigmoid & 5 & 0 & 75.48 ± 0.49 & - \\
+cifar100 & resnet18 & esrelu & 5 & 0 & 77.08 ± 0.14 & - \\
+cifar100 & resnet18 & gelu & 5 & 0 & 77.29 ± 0.13 & - \\
+cifar100 & resnet18 & leakyrelu & 5 & 0 & 76.81 ± 0.18 & - \\
+cifar100 & resnet18 & mish & 5 & 0 & 77.27 ± 0.23 & - \\
+cifar100 & resnet18 & prelu & 5 & 0 & 75.42 ± 0.34 & - \\
+cifar100 & resnet18 & relu & 5 & 0 & 76.62 ± 0.24 & - \\
+cifar100 & resnet18 & silu & 5 & 0 & 77.43 ± 0.27 & - \\
+cifar100 & vit_tiny & apu & 5 & 0 & 52.92 ± 0.62 & - \\
+cifar100 & vit_tiny & esrelu & 5 & 0 & 57.37 ± 0.34 & - \\
+cifar100 & vit_tiny & gelu & 5 & 0 & 56.23 ± 0.48 & - \\
+cifar100 & vit_tiny & leakyrelu & 5 & 0 & 57.44 ± 0.43 & - \\
+cifar100 & vit_tiny & mish & 5 & 0 & 55.76 ± 0.43 & - \\
+cifar100 & vit_tiny & prelu & 5 & 0 & 57.22 ± 0.24 & - \\
+cifar100 & vit_tiny & relu & 5 & 0 & 57.41 ± 0.37 & - \\
+cifar100 & vit_tiny & silu & 5 & 0 & 56.05 ± 0.38 & - \\
+cifar10 & resnet18 & apu & 5 & 0 & 94.51 ± 0.14 & - \\
+cifar10 & resnet18 & esrelu & 5 & 0 & 95.06 ± 0.13 & - \\
+cifar10 & resnet18 & gelu & 5 & 0 & 94.98 ± 0.11 & - \\
+cifar10 & resnet18 & leakyrelu & 5 & 0 & 95.02 ± 0.16 & - \\
+cifar10 & resnet18 & mish & 5 & 0 & 95.01 ± 0.08 & - \\
+cifar10 & resnet18 & prelu & 5 & 0 & 94.70 ± 0.08 & - \\
+cifar10 & resnet18 & relu & 5 & 0 & 94.90 ± 0.14 & - \\
+cifar10 & resnet18 & silu & 5 & 0 & 95.04 ± 0.21 & - \\
+cifar10 & simplecnn & apu & 5 & 0 & 83.33 ± 0.42 & - \\
+cifar10 & simplecnn & esrelu & 5 & 0 & 82.45 ± 0.13 & - \\
+cifar10 & simplecnn & gelu & 5 & 0 & 82.53 ± 0.15 & - \\
+cifar10 & simplecnn & leakyrelu & 5 & 0 & 82.39 ± 0.43 & - \\
+cifar10 & simplecnn & mish & 5 & 0 & 82.32 ± 0.20 & - \\
+cifar10 & simplecnn & prelu & 5 & 0 & 82.37 ± 0.29 & - \\
+cifar10 & simplecnn & relu & 5 & 0 & 82.13 ± 0.18 & - \\
+cifar10 & simplecnn & silu & 5 & 0 & 82.23 ± 0.18 & - \\
+cifar10 & vit_tiny & apu & 5 & 0 & 80.59 ± 1.03 & - \\
+cifar10 & vit_tiny & esrelu & 5 & 0 & 84.29 ± 0.24 & - \\
+cifar10 & vit_tiny & gelu & 5 & 0 & 84.26 ± 0.50 & - \\
+cifar10 & vit_tiny & leakyrelu & 5 & 0 & 84.37 ± 0.16 & - \\
+cifar10 & vit_tiny & mish & 5 & 0 & 83.93 ± 0.20 & - \\
+cifar10 & vit_tiny & prelu & 5 & 0 & 84.71 ± 0.53 & - \\
+cifar10 & vit_tiny & relu & 5 & 0 & 84.27 ± 0.38 & - \\
+cifar10 & vit_tiny & silu & 5 & 0 & 84.27 ± 0.43 & - \\
+emnist & resnet18 & apu & 3 & 0 & 88.61 ± 0.08 & - \\
+emnist & resnet18 & esrelu & 3 & 0 & 89.11 ± 0.16 & - \\
+emnist & resnet18 & gelu & 3 & 0 & 89.03 ± 0.07 & - \\
+emnist & resnet18 & leakyrelu & 3 & 0 & 89.24 ± 0.07 & - \\
+emnist & resnet18 & mish & 3 & 0 & 89.07 ± 0.08 & - \\
+emnist & resnet18 & prelu & 3 & 0 & 89.18 ± 0.12 & - \\
+emnist & resnet18 & relu & 3 & 0 & 89.24 ± 0.07 & - \\
+emnist & resnet18 & silu & 3 & 0 & 88.87 ± 0.10 & - \\
+emnist & simplecnn & apu & 3 & 0 & 84.52 ± 0.18 & - \\
+emnist & simplecnn & esrelu & 3 & 0 & 86.36 ± 0.12 & - \\
+emnist & simplecnn & gelu & 3 & 0 & 86.57 ± 0.15 & - \\
+emnist & simplecnn & leakyrelu & 3 & 0 & 86.41 ± 0.19 & - \\
+emnist & simplecnn & mish & 3 & 0 & 86.45 ± 0.15 & - \\
+emnist & simplecnn & prelu & 3 & 0 & 86.13 ± 0.20 & - \\
+emnist & simplecnn & relu & 3 & 0 & 86.52 ± 0.14 & - \\
+emnist & simplecnn & silu & 3 & 0 & 86.11 ± 0.19 & - \\
+emnist & vit_tiny & apu & 3 & 0 & 87.51 ± 0.19 & - \\
+emnist & vit_tiny & esrelu & 3 & 0 & 87.77 ± 0.20 & - \\
+emnist & vit_tiny & gelu & 3 & 0 & 87.60 ± 0.14 & - \\
+emnist & vit_tiny & leakyrelu & 3 & 0 & 87.69 ± 0.16 & - \\
+emnist & vit_tiny & mish & 3 & 0 & 87.65 ± 0.10 & - \\
+emnist & vit_tiny & prelu & 3 & 0 & 87.51 ± 0.09 & - \\
+emnist & vit_tiny & relu & 3 & 0 & 87.83 ± 0.17 & - \\
+emnist & vit_tiny & silu & 3 & 0 & 87.57 ± 0.12 & - \\
+mnist & resnet18 & apu & 3 & 0 & 99.56 ± 0.04 & - \\
+mnist & resnet18 & esrelu & 3 & 0 & 99.62 ± 0.04 & - \\
+mnist & resnet18 & gelu & 3 & 0 & 99.59 ± 0.01 & - \\
+mnist & resnet18 & leakyrelu & 3 & 0 & 99.60 ± 0.02 & - \\
+mnist & resnet18 & mish & 3 & 0 & 99.63 ± 0.05 & - \\
+mnist & resnet18 & prelu & 3 & 0 & 99.60 ± 0.06 & - \\
+mnist & resnet18 & relu & 3 & 0 & 99.63 ± 0.04 & - \\
+mnist & resnet18 & silu & 3 & 0 & 99.61 ± 0.02 & - \\
+mnist & simplecnn & apu & 3 & 0 & 98.99 ± 0.10 & - \\
+mnist & simplecnn & esrelu & 3 & 0 & 99.16 ± 0.06 & - \\
+mnist & simplecnn & gelu & 3 & 0 & 99.24 ± 0.06 & - \\
+mnist & simplecnn & leakyrelu & 3 & 0 & 99.21 ± 0.05 & - \\
+mnist & simplecnn & mish & 3 & 0 & 99.17 ± 0.07 & - \\
+mnist & simplecnn & prelu & 3 & 0 & 99.18 ± 0.07 & - \\
+mnist & simplecnn & relu & 3 & 0 & 99.22 ± 0.06 & - \\
+mnist & simplecnn & silu & 3 & 0 & 99.17 ± 0.08 & - \\
+mnist & vit_tiny & apu & 3 & 0 & 97.99 ± 0.02 & - \\
+mnist & vit_tiny & esrelu & 3 & 0 & 99.00 ± 0.15 & - \\
+mnist & vit_tiny & gelu & 3 & 0 & 98.90 ± 0.10 & - \\
+mnist & vit_tiny & leakyrelu & 3 & 0 & 99.09 ± 0.03 & - \\
+mnist & vit_tiny & mish & 3 & 0 & 98.64 ± 0.13 & - \\
+mnist & vit_tiny & prelu & 3 & 0 & 99.06 ± 0.07 & - \\
+mnist & vit_tiny & relu & 3 & 0 & 99.06 ± 0.09 & - \\
+mnist & vit_tiny & silu & 3 & 0 & 98.67 ± 0.08 & - \\
+\bottomrule
+\end{tabular}

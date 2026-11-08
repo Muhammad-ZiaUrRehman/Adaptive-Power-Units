@@ -1,0 +1,14 @@
+dataset,arch,relu,leakyrelu,prelu,gelu,silu,mish,esrelu,apu
+cifar10,resnet18,6.0,3.0,7.0,5.0,2.0,4.0,1.0,8.0
+cifar10,simplecnn,8.0,4.0,5.0,2.0,7.0,6.0,3.0,1.0
+cifar10,vit_tiny,5.0,2.0,1.0,6.0,4.0,7.0,3.0,8.0
+cifar100,resnet18,6.0,5.0,8.0,2.0,1.0,3.0,4.0,9.0
+cifar100,vit_tiny,2.0,1.0,4.0,5.0,6.0,7.0,3.0,8.0
+emnist,resnet18,1.0,2.0,3.0,6.0,7.0,5.0,4.0,8.0
+emnist,simplecnn,2.0,4.0,6.0,1.0,7.0,3.0,5.0,8.0
+emnist,vit_tiny,1.0,3.0,8.0,5.0,6.0,4.0,2.0,7.0
+mnist,resnet18,1.0,6.0,5.0,7.0,4.0,2.0,3.0,8.0
+mnist,simplecnn,2.0,3.0,4.0,1.0,6.0,5.0,7.0,8.0
+mnist,vit_tiny,3.0,1.0,2.0,5.0,6.0,7.0,4.0,8.0
+tinyimagenet,resnet18,4.0,,,3.0,1.0,2.0,,5.0
+tinyimagenet,vit_tiny,1.0,,,4.0,2.0,3.0,,5.0

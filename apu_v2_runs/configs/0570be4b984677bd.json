@@ -1,0 +1,109 @@
+{
+  "config": {
+    "activation": {
+      "a_max": 0.5,
+      "eps": 0.001,
+      "init_A": 0.3,
+      "init_bz": 0.0,
+      "init_wz": 0.5,
+      "kind": "apu",
+      "mode": "full",
+      "name": "apu",
+      "p0": 1.0,
+      "p_max": 1.5,
+      "p_min": 0.5,
+      "sharing": "module",
+      "trainable": true
+    },
+    "augmentation": {
+      "horizontal_flip": 0.5,
+      "random_crop_pad": 4
+    },
+    "batch_size": 128,
+    "checkpoint_rule": "final_epoch",
+    "ckpt_every": 5,
+    "compile": false,
+    "dataset": {
+      "archive": "cifar-10-python.tar.gz",
+      "archive_md5": "c58f30108f718f92721af3b95e74349a",
+      "archive_md5_verified": true,
+      "extracted_files_verified": true,
+      "name": "cifar10",
+      "source": "torchvision.datasets.CIFAR10 0.26.0+cu128",
+      "test_n": 10000,
+      "test_sha256": "2c33b053d1cd726af8d86e174a96dd89d7000ba1412add026d68142375b89d51",
+      "train_n": 50000,
+      "train_sha256": "973ef2abb5897efc795681a4d79a6f5f642fa2bcb1a828f7476017c89db53a57"
+    },
+    "deterministic": true,
+    "diagnostics": {
+      "epochs": [
+        1,
+        5,
+        25,
+        50,
+        100,
+        150,
+        200
+      ],
+      "probe_examples": 1024
+    },
+    "epochs": 200,
+    "eval_batch_size": 512,
+    "fit_partition": "train_minus_validation",
+    "loss": {
+      "label_smoothing": 0.0,
+      "name": "cross_entropy"
+    },
+    "model": {
+      "arch": "simplecnn",
+      "depth": 2
+    },
+    "optimizer": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "lr": 0.002,
+      "name": "adamw",
+      "param_groups": "decay: trainable backbone tensors with ndim > 1; no decay: biases, norm and all activation parameters",
+      "weight_decay": 0.0001
+    },
+    "precision": "bf16-autocast",
+    "rng_scheme": "keyed-v1: init(seed,init,module) act(seed,act-init,module) order(seed,order,epoch) aug(seed,aug,epoch) probe(split_seed,probe)",
+    "schedule": {
+      "kind": "linear-warmup+cosine",
+      "per": "step",
+      "warmup_epochs": 1
+    },
+    "seed": 1001,
+    "source_revision": {
+      "code_sha256": "abddf1ce5761a64a44dc1903175cf37a536d23d53993d38db7a2a2fbe0849e6c",
+      "files": {
+        "activations.py": "a908a6f6204231386f695c6d8c7f5235108a4fe96c188681ffd2d9292dacd211",
+        "config.py": "79fde938a6d8fa4d5a48d42229e9880f93f60e0e40d3f32a9906fac69e0bb198",
+        "data.py": "5b88c82089055b606a28365433ab11f51fae4f4b8c84d7241746f86203cddb5a",
+        "evaluate.py": "067e0f060c6e6a9b739dcda29b1d6883f1aa1a6d30c86f2e0f39d190535cca77",
+        "models.py": "f8a05306d48f67be4b9d06e11214d66ad484045cbc9e873604e417bb38a78768",
+        "train.py": "431636af17c81f2ded335aacda2f0962146109cc22d056a0416d5a5ed0e3b2fb"
+      },
+      "git_commit": "unavailable"
+    },
+    "split": {
+      "dataset": "cifar10",
+      "n_train": 45000,
+      "n_val": 5000,
+      "split_id": "d3959a1645b8a7d2",
+      "split_seed": 20261030,
+      "stratified": true,
+      "train_indices_sha256": "59df5205402832cda69b55d71d275e496cc67133222a4bac4c21f002f10d4442",
+      "val_fraction": 0.1,
+      "val_indices_sha256": "e42bb997021c879a9b6728b69f83f75434ffe47c07380ca7e1d71714f1913795"
+    },
+    "train_limit": null,
+    "val_limit": null
+  },
+  "created": "2026-10-31T17:20:14",
+  "digest": "0570be4b984677bd2ab704ff3b82ad800f9183db354f3be419bd516d41b4b6ef",
+  "schema": "apu-run-v2"
+}

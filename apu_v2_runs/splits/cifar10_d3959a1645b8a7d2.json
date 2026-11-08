@@ -1,0 +1,23 @@
+{
+  "dataset": "cifar10",
+  "n_train": 45000,
+  "n_val": 5000,
+  "split_id": "d3959a1645b8a7d2",
+  "split_seed": 20261030,
+  "stratified": true,
+  "train_indices_sha256": "59df5205402832cda69b55d71d275e496cc67133222a4bac4c21f002f10d4442",
+  "val_fraction": 0.1,
+  "val_indices_sha256": "e42bb997021c879a9b6728b69f83f75434ffe47c07380ca7e1d71714f1913795",
+  "val_per_class": {
+    "0": 500,
+    "1": 500,
+    "2": 500,
+    "3": 500,
+    "4": 500,
+    "5": 500,
+    "6": 500,
+    "7": 500,
+    "8": 500,
+    "9": 500
+  }
+}

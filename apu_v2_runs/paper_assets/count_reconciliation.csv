@@ -1,0 +1,5 @@
+quantity,reported_in_plan,recovered,matches
+distinct classification jobs,483,483,True
+completed classification jobs,464,464,True
+failed (diverged) classification jobs,19,19,True
+completed non-holdout jobs,404,404,True

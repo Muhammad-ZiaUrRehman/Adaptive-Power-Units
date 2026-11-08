@@ -1,0 +1,219 @@
+{
+  "analysis": {
+    "alpha": 0.05,
+    "ci_level": 0.95,
+    "exploratory": "everything else (fixed-recipe arm, diagnostics, cost correlations, historical results) is labelled exploratory",
+    "failures": "retained and reported with denominators",
+    "multiplicity": "primary comparison alone at alpha; Holm over the secondary family within each stage",
+    "paired_rule": "paired t-interval when every compared seed has identical backbone-initialisation checksums and the keyed data plan was verified identical; otherwise Welch",
+    "primary_comparison": "apu vs apu_frozen, equal-search arm, stage 1; repeated as the confirmation test in stage 2",
+    "primary_outcome": "final-epoch test top-1 of the final-epoch checkpoint (checkpoint rule fixed in advance)",
+    "secondary_family": [
+      "apu vs strongest validated standard (relu, gelu)",
+      "apu vs strongest validated adaptive (prelu, acon_c)",
+      "apu vs apu_const (learned constant power)"
+    ],
+    "seeds": "fixed in advance; no seeds are added based on significance",
+    "strongest_rule": "highest mean final validation top-1 among the final fits of that group (validation only)"
+  },
+  "created": "2026-10-31T17:20:12",
+  "data": {
+    "split_ids": {
+      "cifar10": "d3959a1645b8a7d2",
+      "cifar100": "deafa5c2ff714145"
+    },
+    "stage1_dataset": "cifar10",
+    "stage2_dataset": "cifar100",
+    "versions": {
+      "cifar10": {
+        "test_sha256": "2c33b053d1cd726af8d86e174a96dd89d7000ba1412add026d68142375b89d51",
+        "train_sha256": "973ef2abb5897efc795681a4d79a6f5f642fa2bcb1a828f7476017c89db53a57"
+      },
+      "cifar100": {
+        "test_sha256": "9f0797cda23af3231dce0cca7e8d619c0607f6bb8ca05e9b95ff23e4d044c600",
+        "train_sha256": "3f04bb596c34a28a39a030be86f7777c004db9cb45165568a504cca261f6765c"
+      }
+    }
+  },
+  "decision_rules": {
+    "A": "Full adaptation exceeds the frozen profile and the strongest validated standard and adaptive baselines in both shallow datasets -> evidence for learned power adaptation in these tested shallow settings, with stated uncertainty and measured costs.",
+    "B": "Full and frozen profiles perform similarly -> a useful fixed profile may explain any gain; learning has not demonstrated additional value.",
+    "C": "Benefit appears only on CIFAR-10 -> a restricted exploratory observation requiring further confirmation.",
+    "D": "Accuracy improves but runtime increases -> an accuracy and computation trade-off, not general efficiency.",
+    "E": "No reproducible advantage over strong controls -> revise the central claim or pursue a carefully supported behavioural analysis."
+  },
+  "execution": {
+    "batch_size": 128,
+    "checkpoint_rule": "final_epoch",
+    "ckpt_every": 5,
+    "compile": false,
+    "deterministic": true,
+    "diag_epochs": [
+      1,
+      5,
+      25,
+      50,
+      100,
+      150,
+      200
+    ],
+    "precision": "bf16-autocast",
+    "probe_n": 1024,
+    "train_limit": null,
+    "val_limit": null
+  },
+  "extensions": {
+    "depth_study": {
+      "dataset": "cifar10",
+      "depths": [
+        4,
+        6
+      ],
+      "hyperparameters": "stage-1 selected configuration of each method",
+      "methods": [
+        "relu",
+        "gelu",
+        "apu_frozen",
+        "apu"
+      ],
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "pade": {
+      "method": "pade",
+      "search": "same grid, selection seeds and epochs as stage 1",
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "trigger": "decision A, or FORCE_EXTENSIONS (then labelled exploratory)"
+  },
+  "final_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "first_passage": {
+    "budget": "configured epochs (identical across methods)",
+    "censoring": "runs that never reach it stay visible as censored",
+    "metric": "val_top1",
+    "threshold_fraction": 0.95,
+    "threshold_rule": "0.95 x mean final validation top-1 of relu in the same arm and setting"
+  },
+  "fixed_recipe": {
+    "batch_size": 128,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "epochs": 200,
+    "label_smoothing": 0.0,
+    "lr": 0.001,
+    "optimizer": "adamw",
+    "warmup_epochs": 1,
+    "weight_decay": 0.0001
+  },
+  "groups": {
+    "adaptive": [
+      "prelu",
+      "acon_c"
+    ],
+    "controls": [
+      "apu_frozen",
+      "apu_const"
+    ],
+    "proposed": [
+      "apu"
+    ],
+    "standard": [
+      "relu",
+      "gelu"
+    ]
+  },
+  "methods": [
+    "relu",
+    "gelu",
+    "prelu",
+    "apu_frozen",
+    "apu_const",
+    "apu",
+    "acon_c"
+  ],
+  "protocol_digest": "a3f970bfd0ecc8a9abdb90369f0b84bde57a58a540adf9d1654cb7699f37e872",
+  "protocol_version": 1,
+  "question": "Does learning a bounded input-dependent power improve shallow image classification over a matched frozen profile and competitive learned activations, under equal validation and training budgets, and at what computational cost?",
+  "search": {
+    "budget": "identical grid, selection seeds and epochs for every method, including the frozen control",
+    "criterion": "mean final-epoch validation top-1 over the selection seeds",
+    "epochs": 200,
+    "failed_candidate": "a candidate with any failed selection seed is not selectable",
+    "grid": [
+      {
+        "lr": 0.001,
+        "weight_decay": 0.0001
+      },
+      {
+        "lr": 0.0005,
+        "weight_decay": 0.0001
+      },
+      {
+        "lr": 0.002,
+        "weight_decay": 0.0001
+      },
+      {
+        "lr": 0.001,
+        "weight_decay": 0.0005
+      },
+      {
+        "lr": 0.0005,
+        "weight_decay": 0.0005
+      },
+      {
+        "lr": 0.002,
+        "weight_decay": 0.0005
+      }
+    ],
+    "selection_seeds": [
+      1000,
+      1001
+    ],
+    "tie_break": "earlier candidate in grid order (grid[0] is the historical recipe)"
+  },
+  "source_revision": {
+    "code_sha256": "abddf1ce5761a64a44dc1903175cf37a536d23d53993d38db7a2a2fbe0849e6c",
+    "files": {
+      "activations.py": "a908a6f6204231386f695c6d8c7f5235108a4fe96c188681ffd2d9292dacd211",
+      "config.py": "79fde938a6d8fa4d5a48d42229e9880f93f60e0e40d3f32a9906fac69e0bb198",
+      "data.py": "5b88c82089055b606a28365433ab11f51fae4f4b8c84d7241746f86203cddb5a",
+      "evaluate.py": "067e0f060c6e6a9b739dcda29b1d6883f1aa1a6d30c86f2e0f39d190535cca77",
+      "models.py": "f8a05306d48f67be4b9d06e11214d66ad484045cbc9e873604e417bb38a78768",
+      "train.py": "431636af17c81f2ded335aacda2f0962146109cc22d056a0416d5a5ed0e3b2fb"
+    },
+    "git_commit": "unavailable"
+  },
+  "stage1": {
+    "arch": "simplecnn",
+    "dataset": "cifar10",
+    "depth": 2,
+    "epochs": 200,
+    "role": "primary (equal-search arm) and fixed-recipe arm"
+  },
+  "stage2": {
+    "arch": "simplecnn",
+    "dataset": "cifar100",
+    "depth": 2,
+    "epochs": 200,
+    "role": "predeclared confirmation of the selected protocol (no new selection)"
+  }
+}

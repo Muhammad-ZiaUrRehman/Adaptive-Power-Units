@@ -1,0 +1,6 @@
+,p_mean,p_mean,p_std_within,p_std_within,chan_spread,chan_spread,amplitude,amplitude
+,mean,std,mean,std,mean,std,mean,std
+depth,,,,,,,,
+deep,1.489,0.0099,0.0254,0.0267,0.0161,0.0165,0.5,0.0
+middle,1.4999,0.0,0.0006,0.0006,0.0,0.0,0.5,0.0
+shallow,1.3135,0.049,0.1238,0.0226,0.0718,0.0116,0.5,0.0

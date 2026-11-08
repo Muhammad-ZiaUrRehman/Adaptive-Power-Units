@@ -1,0 +1,7 @@
+Variant,Learned exponent,Input-conditioned,Bounded,cifar100 top-1 (%),seeds,diverged
+ReLU,No,No,n/a,76.62 ± 0.24,5,0
+Fixed power (p=2),No,No,n/a,diverged,0,5
+Learned constant p,Yes,No,Yes,73.45 ± 0.20,5,0
+Linear p(z),Yes,Yes,No,diverged,0,5
+Sigmoid p(z),Yes,Yes,Yes,75.48 ± 0.49,5,0
+Full APU,Yes,Yes,Yes,75.40 ± 0.48,5,0

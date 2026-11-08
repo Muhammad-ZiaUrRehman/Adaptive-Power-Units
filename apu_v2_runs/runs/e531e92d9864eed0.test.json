@@ -1,0 +1,16 @@
+{
+  "checkpoint": {
+    "epoch": 200,
+    "path": "checkpoints/e531e92d9864eed0/final.pt",
+    "rule": "final_epoch",
+    "sha256": "eb0424d2ca9f353fe8f2ba5b470db205c54a1178c21340c4e78516d3b354da18"
+  },
+  "digest": "e531e92d9864eed00a6c29c3673afc1b051eb8402b845ba2f375a9712fb04044",
+  "evaluated": "2026-11-02T03:56:01",
+  "lock_digest": "d14302b877d38c45b40cdf5b40323e44c9e5c13178d6efc81e33c4d03e6447f5",
+  "seconds": 0.07800006866455078,
+  "test_loss": 2.191516589355469,
+  "test_n": 10000,
+  "test_top1": 52.31,
+  "test_top5": 80.25
+}

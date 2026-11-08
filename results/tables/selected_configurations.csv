@@ -1,0 +1,8 @@
+method,candidate,lr,weight_decay,val_top1_mean,lr_at_grid_edge,wd_at_grid_edge
+relu,2,0.002,0.0001,81.97,True,True
+gelu,2,0.002,0.0001,82.67,True,True
+prelu,2,0.002,0.0001,82.18,True,True
+apu_frozen,1,0.0005,0.0001,78.95,True,True
+apu_const,3,0.001,0.0005,79.89,False,True
+apu,3,0.001,0.0005,82.64,False,True
+acon_c,5,0.002,0.0005,82.44,True,True

@@ -1,0 +1,2 @@
+file,date,gpu,torch,cuda,cudnn,python,platform
+env_20261021_174159.json,2026-10-21T17:41:59,NVIDIA GeForce RTX 5070,2.11.0+cu128,12.8,91900,3.12.10,Windows-11-10.0.26200-SP0

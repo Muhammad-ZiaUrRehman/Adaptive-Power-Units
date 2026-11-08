@@ -1,0 +1,29 @@
+{
+  "act": "prelu",
+  "batch": 128,
+  "blocks": 7,
+  "data_dir": "C:\\Users\\ziaur\\Downloads\\APU_Final2\\data",
+  "dataset": "cifar10",
+  "deterministic": true,
+  "device": "cuda",
+  "epoch_reps": 2,
+  "iters_per_block": 30,
+  "mode": "compiled",
+  "model": {
+    "arch": "simplecnn",
+    "depth": 2
+  },
+  "optimizer": {
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "lr": 0.001,
+    "name": "adamw",
+    "weight_decay": 0.0001
+  },
+  "precision": "bf16-autocast",
+  "split_json": "C:\\Users\\ziaur\\Downloads\\APU_Final2\\apu_v2_runs\\splits\\cifar10_d3959a1645b8a7d2.json",
+  "train_limit": null,
+  "warmup": 20
+}

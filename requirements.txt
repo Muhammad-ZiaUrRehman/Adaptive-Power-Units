@@ -1,0 +1,11 @@
+# PyTorch first, from the CUDA 12.8 index:
+#   pip install torch==2.11.0 torchvision==0.26.0 --index-url https://download.pytorch.org/whl/cu128
+numpy==2.5.4
+pandas==3.0.6
+scipy
+matplotlib
+tqdm
+psutil
+jinja2
+ipykernel
+ipywidgets

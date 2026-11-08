@@ -1,0 +1,14 @@
+dataset,arch,apu,best_baseline,best_value,apu_highest
+cifar10,resnet18,94.514,esrelu,95.06,False
+cifar10,simplecnn,83.326,gelu,82.53,True
+cifar10,vit_tiny,80.59400000000001,prelu,84.712,False
+cifar100,resnet18,75.4,silu,77.42999999999999,False
+cifar100,vit_tiny,52.916,leakyrelu,57.444,False
+emnist,resnet18,88.61170212765957,relu,89.24468085106383,False
+emnist,simplecnn,84.5177304964539,gelu,86.56914893617022,False
+emnist,vit_tiny,87.51241134751773,relu,87.82801418439716,False
+mnist,resnet18,99.56333333333333,relu,99.63,False
+mnist,simplecnn,98.99000000000001,gelu,99.24000000000001,False
+mnist,vit_tiny,97.99000000000001,leakyrelu,99.08999999999999,False
+tinyimagenet,resnet18,58.872,silu,62.88199999999999,False
+tinyimagenet,vit_tiny,36.904,relu,39.914,False

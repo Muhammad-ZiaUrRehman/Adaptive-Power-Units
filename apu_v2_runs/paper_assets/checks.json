@@ -1,0 +1,575 @@
+{
+  "all_passed": true,
+  "created": "2026-10-31T17:20:12",
+  "data_plan_verified": true,
+  "results": [
+    {
+      "details": {
+        "rel_err": {
+          "const": 0.0,
+          "fixed": 1.6923273464339056e-07,
+          "full": 2.1706590124068002e-07,
+          "linear": 2.0354384076921266e-07,
+          "sigmoid": 3.37188682494538e-07
+        }
+      },
+      "name": "APU forward matches float64 reference (relative error < 1e-5)",
+      "passed": true
+    },
+    {
+      "details": {},
+      "name": "identity at A = 0, p0 = 1 (exact)",
+      "passed": true
+    },
+    {
+      "details": {
+        "note": "the const control starts as the identity and cannot match the non-constant initial full profile"
+      },
+      "name": "learned constant power initialised at p = 1 is the identity (exact)",
+      "passed": true
+    },
+    {
+      "details": {
+        "p_range": [
+          0.699999988079071,
+          1.2999999523162842
+        ]
+      },
+      "name": "full APU initial profile is non-constant in z",
+      "passed": true
+    },
+    {
+      "details": {
+        "per_mode": {
+          "const": true,
+          "fixed": true,
+          "full": true,
+          "linear": true,
+          "sigmoid": true
+        }
+      },
+      "name": "sign preservation sign(f(z)) = sign(z)",
+      "passed": true
+    },
+    {
+      "details": {},
+      "name": "broadcasting of per-channel parameters (dim 1 and dim -1)",
+      "passed": true
+    },
+    {
+      "details": {},
+      "name": "state_dict serialization round trip",
+      "passed": true
+    },
+    {
+      "details": {
+        "max_abs": 7.450580596923828e-09
+      },
+      "name": "CPU and GPU outputs agree (atol 1e-5)",
+      "passed": true
+    },
+    {
+      "details": {
+        "per_setting": {
+          "A near a_max (raw_A=4)": true,
+          "defaults": true,
+          "large b_z (5)": true,
+          "large w_z (8)": true,
+          "negative A (raw_A=-3)": true,
+          "small eps (1e-6)": true
+        }
+      },
+      "name": "float64 finite-difference gradient check of the reference (incl. near-zero inputs and parameter limits)",
+      "passed": true
+    },
+    {
+      "details": {
+        "grad_wz_rel_err": 3.629083575052825e-08,
+        "grad_z_rel_err": 1.5410181717170508e-07
+      },
+      "name": "production float32 autograd agrees with float64 reference autograd (rel < 1e-3)",
+      "passed": true
+    },
+    {
+      "details": {
+        "measured_range": {
+          "max": 98.97650146484375,
+          "min": -79.7750015258789,
+          "n_layers": 230,
+          "q001": -41.063297271728516,
+          "q999": 34.06331253051758,
+          "source": "historical analysis/exp_*.pt (sampled pre-activations of trained APU models)"
+        },
+        "per_case": {
+          "measured historical analysis/exp_*.pt (sampled pr | const | default": true,
+          "measured historical analysis/exp_*.pt (sampled pr | fixed | default": true,
+          "measured historical analysis/exp_*.pt (sampled pr | full | default": true,
+          "measured historical analysis/exp_*.pt (sampled pr | full | raw_A=4": true,
+          "measured historical analysis/exp_*.pt (sampled pr | linear | default": true,
+          "measured historical analysis/exp_*.pt (sampled pr | sigmoid | default": true,
+          "stress [-1e4, 1e4] | const | default": true,
+          "stress [-1e4, 1e4] | fixed | default": true,
+          "stress [-1e4, 1e4] | full | default": true,
+          "stress [-1e4, 1e4] | full | raw_A=4": true,
+          "stress [-1e4, 1e4] | linear | default": true,
+          "stress [-1e4, 1e4] | sigmoid | default": true
+        }
+      },
+      "name": "finite outputs and gradients over stress and measured pre-activation ranges",
+      "passed": true
+    },
+    {
+      "details": {
+        "max_derivative": 2.2440178394317627,
+        "min_derivative": 0.4015749990940094
+      },
+      "name": "report: minimum derivative of the default APU on [-6, 6] (monotonicity is not guaranteed in general)",
+      "passed": true
+    },
+    {
+      "details": {
+        "max_limit": true,
+        "note": "re-implementation; verify against the authors' code before submission",
+        "silu": true
+      },
+      "name": "ACON-C identities (SiLU at p1=1,p2=0,beta=1; max(p1 x, p2 x) for large beta)",
+      "passed": true
+    },
+    {
+      "details": {
+        "max_fit_error": 0.08635188639163971
+      },
+      "name": "safe Pade activation: initial fit to leaky ReLU on [-3, 3] (max error < 0.1) and finite on [-1e3, 1e3]",
+      "passed": true
+    },
+    {
+      "details": {
+        "counts": {
+          "resnet18/apu": 51,
+          "simplecnn/apu": 9,
+          "vit_tiny/apu": 36
+        }
+      },
+      "name": "extra learned activation parameters: 9 (SimpleCNN), 51 (ResNet-18), 36 (ViT-Tiny)",
+      "passed": true
+    },
+    {
+      "details": {
+        "counts": {
+          "cifar10/resnet18/apu": {
+            "historical": 11174013,
+            "now": 11174013
+          },
+          "cifar10/resnet18/apu_const": {
+            "historical": 11173979,
+            "now": 11173979
+          },
+          "cifar10/resnet18/apu_linear": {
+            "historical": 11174013,
+            "now": 11174013
+          },
+          "cifar10/resnet18/apu_sigmoid": {
+            "historical": 11173996,
+            "now": 11173996
+          },
+          "cifar10/resnet18/esrelu": {
+            "historical": 11173962,
+            "now": 11173962
+          },
+          "cifar10/resnet18/gelu": {
+            "historical": 11173962,
+            "now": 11173962
+          },
+          "cifar10/resnet18/leakyrelu": {
+            "historical": 11173962,
+            "now": 11173962
+          },
+          "cifar10/resnet18/mish": {
+            "historical": 11173962,
+            "now": 11173962
+          },
+          "cifar10/resnet18/prelu": {
+            "historical": 11173979,
+            "now": 11173979
+          },
+          "cifar10/resnet18/relu": {
+            "historical": 11173962,
+            "now": 11173962
+          },
+          "cifar10/resnet18/silu": {
+            "historical": 11173962,
+            "now": 11173962
+          },
+          "cifar10/simplecnn/apu": {
+            "historical": 1626451,
+            "now": 1626451
+          },
+          "cifar10/simplecnn/esrelu": {
+            "historical": 1626442,
+            "now": 1626442
+          },
+          "cifar10/simplecnn/gelu": {
+            "historical": 1626442,
+            "now": 1626442
+          },
+          "cifar10/simplecnn/leakyrelu": {
+            "historical": 1626442,
+            "now": 1626442
+          },
+          "cifar10/simplecnn/mish": {
+            "historical": 1626442,
+            "now": 1626442
+          },
+          "cifar10/simplecnn/prelu": {
+            "historical": 1626445,
+            "now": 1626445
+          },
+          "cifar10/simplecnn/relu": {
+            "historical": 1626442,
+            "now": 1626442
+          },
+          "cifar10/simplecnn/silu": {
+            "historical": 1626442,
+            "now": 1626442
+          },
+          "cifar10/vit_tiny/apu": {
+            "historical": 5362798,
+            "now": 5362798
+          },
+          "cifar10/vit_tiny/esrelu": {
+            "historical": 5362762,
+            "now": 5362762
+          },
+          "cifar10/vit_tiny/gelu": {
+            "historical": 5362762,
+            "now": 5362762
+          },
+          "cifar10/vit_tiny/leakyrelu": {
+            "historical": 5362762,
+            "now": 5362762
+          },
+          "cifar10/vit_tiny/mish": {
+            "historical": 5362762,
+            "now": 5362762
+          },
+          "cifar10/vit_tiny/prelu": {
+            "historical": 5362774,
+            "now": 5362774
+          },
+          "cifar10/vit_tiny/relu": {
+            "historical": 5362762,
+            "now": 5362762
+          },
+          "cifar10/vit_tiny/silu": {
+            "historical": 5362762,
+            "now": 5362762
+          },
+          "cifar100/resnet18/apu": {
+            "historical": 11220183,
+            "now": 11220183
+          },
+          "cifar100/resnet18/apu_const": {
+            "historical": 11220149,
+            "now": 11220149
+          },
+          "cifar100/resnet18/apu_linear": {
+            "historical": 11220183,
+            "now": 11220183
+          },
+          "cifar100/resnet18/apu_sigmoid": {
+            "historical": 11220166,
+            "now": 11220166
+          },
+          "cifar100/resnet18/esrelu": {
+            "historical": 11220132,
+            "now": 11220132
+          },
+          "cifar100/resnet18/gelu": {
+            "historical": 11220132,
+            "now": 11220132
+          },
+          "cifar100/resnet18/leakyrelu": {
+            "historical": 11220132,
+            "now": 11220132
+          },
+          "cifar100/resnet18/mish": {
+            "historical": 11220132,
+            "now": 11220132
+          },
+          "cifar100/resnet18/prelu": {
+            "historical": 11220149,
+            "now": 11220149
+          },
+          "cifar100/resnet18/relu": {
+            "historical": 11220132,
+            "now": 11220132
+          },
+          "cifar100/resnet18/silu": {
+            "historical": 11220132,
+            "now": 11220132
+          },
+          "cifar100/vit_tiny/apu": {
+            "historical": 5380168,
+            "now": 5380168
+          },
+          "cifar100/vit_tiny/esrelu": {
+            "historical": 5380132,
+            "now": 5380132
+          },
+          "cifar100/vit_tiny/gelu": {
+            "historical": 5380132,
+            "now": 5380132
+          },
+          "cifar100/vit_tiny/leakyrelu": {
+            "historical": 5380132,
+            "now": 5380132
+          },
+          "cifar100/vit_tiny/mish": {
+            "historical": 5380132,
+            "now": 5380132
+          },
+          "cifar100/vit_tiny/prelu": {
+            "historical": 5380144,
+            "now": 5380144
+          },
+          "cifar100/vit_tiny/relu": {
+            "historical": 5380132,
+            "now": 5380132
+          },
+          "cifar100/vit_tiny/silu": {
+            "historical": 5380132,
+            "now": 5380132
+          }
+        },
+        "note": "historical JSON counts compared where the historical folder is available"
+      },
+      "name": "full-model parameter counts match the historical study",
+      "passed": true
+    },
+    {
+      "details": {
+        "per_method": {
+          "acon_c": {
+            "activation_total": 672,
+            "activation_trainable": 672,
+            "backbone": 1626442,
+            "n_activation_modules": 3,
+            "total": 1627114,
+            "trainable": 1627114
+          },
+          "apu": {
+            "activation_total": 9,
+            "activation_trainable": 9,
+            "backbone": 1626442,
+            "n_activation_modules": 3,
+            "total": 1626451,
+            "trainable": 1626451
+          },
+          "apu_const": {
+            "activation_total": 3,
+            "activation_trainable": 3,
+            "backbone": 1626442,
+            "n_activation_modules": 3,
+            "total": 1626445,
+            "trainable": 1626445
+          },
+          "apu_frozen": {
+            "activation_total": 9,
+            "activation_trainable": 0,
+            "backbone": 1626442,
+            "n_activation_modules": 3,
+            "total": 1626451,
+            "trainable": 1626442
+          },
+          "apu_pc": {
+            "activation_total": 672,
+            "activation_trainable": 672,
+            "backbone": 1626442,
+            "n_activation_modules": 3,
+            "total": 1627114,
+            "trainable": 1627114
+          },
+          "gelu": {
+            "activation_total": 0,
+            "activation_trainable": 0,
+            "backbone": 1626442,
+            "n_activation_modules": 3,
+            "total": 1626442,
+            "trainable": 1626442
+          },
+          "pade": {
+            "activation_total": 30,
+            "activation_trainable": 30,
+            "backbone": 1626442,
+            "n_activation_modules": 3,
+            "total": 1626472,
+            "trainable": 1626472
+          },
+          "prelu": {
+            "activation_total": 3,
+            "activation_trainable": 3,
+            "backbone": 1626442,
+            "n_activation_modules": 3,
+            "total": 1626445,
+            "trainable": 1626445
+          },
+          "relu": {
+            "activation_total": 0,
+            "activation_trainable": 0,
+            "backbone": 1626442,
+            "n_activation_modules": 3,
+            "total": 1626442,
+            "trainable": 1626442
+          }
+        }
+      },
+      "name": "SimpleCNN parameter counts per method (frozen control adds 0 trainable)",
+      "passed": true
+    },
+    {
+      "details": {},
+      "name": "frozen control has exactly the initial function of the full APU (same backbone init, same output)",
+      "passed": true
+    },
+    {
+      "details": {
+        "activation_params_not_in_optimizer": true,
+        "activation_unchanged": true,
+        "backbone_changed": true
+      },
+      "name": "frozen activation parameters receive no updates; every backbone parameter is updated",
+      "passed": true
+    },
+    {
+      "details": {},
+      "name": "changing an activation argument or the split changes the digest; identical config gives the same digest",
+      "passed": true
+    },
+    {
+      "details": {
+        "historical_format_raises": true,
+        "tampered_config_raises": true
+      },
+      "name": "a stored config that no longer matches, or a historical result file, fails visibly when loaded",
+      "passed": true
+    },
+    {
+      "details": {},
+      "name": "backbone initialisation is identical across activations for a seed and differs across seeds",
+      "passed": true
+    },
+    {
+      "details": {
+        "note": "the loader never sees the activation, so equal keys give equal batches for every method"
+      },
+      "name": "sample order and augmentation are keyed by (seed, epoch): identical across methods, independent of the global RNG",
+      "passed": true
+    },
+    {
+      "details": {
+        "evaluate_unchanged": true,
+        "mode_restored": true,
+        "probe_reported_unchanged": true
+      },
+      "name": "probes and evaluation leave BatchNorm running statistics unchanged and restore train mode",
+      "passed": true
+    },
+    {
+      "details": {
+        "version": {
+          "archive": "cifar-10-python.tar.gz",
+          "archive_md5": "c58f30108f718f92721af3b95e74349a",
+          "archive_md5_verified": true,
+          "extracted_files_verified": true,
+          "name": "cifar10",
+          "source": "torchvision.datasets.CIFAR10 0.26.0+cu128",
+          "test_n": 10000,
+          "test_sha256": "2c33b053d1cd726af8d86e174a96dd89d7000ba1412add026d68142375b89d51",
+          "train_n": 50000,
+          "train_sha256": "973ef2abb5897efc795681a4d79a6f5f642fa2bcb1a828f7476017c89db53a57"
+        }
+      },
+      "name": "dataset cifar10: archive MD5 and extracted files verified before training",
+      "passed": true
+    },
+    {
+      "details": {
+        "version": {
+          "archive": "cifar-100-python.tar.gz",
+          "archive_md5": "eb9058c3a382ffc7106e4002c42a8d85",
+          "archive_md5_verified": true,
+          "extracted_files_verified": true,
+          "name": "cifar100",
+          "source": "torchvision.datasets.CIFAR100 0.26.0+cu128",
+          "test_n": 10000,
+          "test_sha256": "9f0797cda23af3231dce0cca7e8d619c0607f6bb8ca05e9b95ff23e4d044c600",
+          "train_n": 50000,
+          "train_sha256": "3f04bb596c34a28a39a030be86f7777c004db9cb45165568a504cca261f6765c"
+        }
+      },
+      "name": "dataset cifar100: archive MD5 and extracted files verified before training",
+      "passed": true
+    },
+    {
+      "details": {
+        "n_fit": 45000,
+        "n_val": 5000
+      },
+      "name": "training and validation indices are disjoint; split files match their checksums",
+      "passed": true
+    },
+    {
+      "details": {
+        "bitwise_equal": true,
+        "determinism": {
+          "actual": "deterministic",
+          "mode": "deterministic-algorithms(warn_only)",
+          "nondeterministic_op_warnings": [],
+          "requested": true
+        },
+        "interrupted_status": "interrupted",
+        "max_abs_param_diff": 0.0,
+        "resumed_from_epoch": 2,
+        "supported_mode": "epoch-boundary resumption only; mid-epoch resumption is not supported",
+        "val_history_resumed": [
+          32.03125,
+          36.71875,
+          38.28125
+        ],
+        "val_history_uninterrupted": [
+          32.03125,
+          36.71875,
+          38.28125
+        ]
+      },
+      "name": "epoch-boundary resume reproduces the uninterrupted run exactly (deterministic configuration)",
+      "passed": true
+    },
+    {
+      "details": {
+        "bitwise_equal": true,
+        "diag_epochs_on": [
+          1,
+          2,
+          3
+        ],
+        "max_abs_param_diff": 0.0
+      },
+      "name": "diagnostics are passive: training with probes on and off gives the same trajectory",
+      "passed": true
+    },
+    {
+      "details": {
+        "note": "every step checks batch indices against the validation index set; a leak would have failed the run",
+        "samples_seen": 6144
+      },
+      "name": "no validation example entered an optimisation batch; test partition never loaded during training",
+      "passed": true
+    },
+    {
+      "details": {},
+      "name": "probes during training left BatchNorm statistics unchanged",
+      "passed": true
+    }
+  ]
+}
