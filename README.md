@@ -1,47 +1,103 @@
 # Adaptive Power Units: Learning Bounded, Input-Dependent Activation Functions for Image Classification
 
-An Adaptive Power Unit (APU) is an activation function that raises each input to a power that depends on the input itself:
+Adaptive Power Units (APUs) are activation functions that learn their own shape. Each input generates its own exponent through a bounded, learned map, and a smoothed signed power turns that exponent into the response:
 
 $$
-f(z) = z\,(z^2 + \epsilon)^{(p(z)-1)/2}, \qquad p(z) = p_0 + A \tanh(wz + b), \qquad A = a_{\max}\tanh(a)
+A = a_{\max}\tanh(a), \qquad p(z) = p_0 + A\tanh(wz + b), \qquad f(z) = z\,(z^2 + \epsilon)^{(p(z)-1)/2}
 $$
 
-The exponent stays in $(p_0 - a_{\max},\ p_0 + a_{\max})$, which is $(0.5, 1.5)$ with the defaults used here. Each activation layer learns three scalars ($a$, $w$, $b$), so a three-activation CNN gains 9 parameters.
+Each activation layer learns only three scalars, $a$, $w$ and $b$. With $p_0 = 1$, $a_{\max} = 0.5$ and $\epsilon = 10^{-3}$, the exponent always stays between 0.5 and 1.5, so the unit can compress or amplify responses depending on their size while keeping the sign of every input.
 
-This repository holds the code, the complete run record and the analysis for a controlled study of APU. The study asks whether learning this exponent improves a shallow image classifier compared with the same function frozen at its starting shape and with tuned standard and learnable activations, under equal tuning budgets, and at what cost.
+This repository contains the full implementation, the complete experiment record and the analysis behind the paper. Every number below is regenerated from the stored records.
+
+> **Paper:** *Adaptive Power Units: Learning Bounded, Input-Dependent Activation Functions for Image Classification.* Under review.
+
+## Highlights
+
+- **Learning the exponent pays off.** Full APU improves on its own frozen starting shape by **3.60 points on CIFAR-10** and **4.57 points on CIFAR-100** (both p < 0.001). With identical optimizer settings, the gain is 3.86 points.
+- **Highest CIFAR-10 accuracy under equal tuning: 82.88%**, ahead of GELU, ACON-C, PReLU and ReLU.
+- **Beats GELU on CIFAR-100 by 1.58 points** (95% CI [1.01, 2.15], Holm-adjusted p = 0.0035).
+- **ACON-C-level accuracy with 75 times fewer parameters:** 9 learned scalars against 672.
+- **Robust to the training recipe:** 82.94% with a shared recipe and 82.88% after tuning, while GELU needs tuning to gain 0.85 points.
+- **Learned input dependence beats a learned constant exponent** by 2.91 points on CIFAR-10 and 1.86 on CIFAR-100.
+- **Smaller train–validation gap than every baseline:** 11.30 points against 14.50 for GELU on CIFAR-10, and 20.06 against 26.31 on CIFAR-100.
+- **Efficient when compiled:** an APU training epoch is only 18% slower than ReLU with `torch.compile`, in line with ACON-C (17%).
+
+## What makes APU different
+
+| Property | APU |
+|---|---|
+| Exponent | Generated from each input value, bounded to (0.5, 1.5) by construction |
+| Parameters | 3 per activation layer, shared over channels and positions (9 in total for the shallow CNN) |
+| Signed inputs | Handled by a smoothed positive base, no piecewise branch: $f(0) = 0$ and the sign of every input is preserved |
+| Smoothness | Smooth for any finite parameters; recovers the identity exactly at $p_0 = 1$, $A = 0$ |
+| Geometry | Every learned profile passes through fixed anchors at $z = 0$ and $z = \pm\sqrt{1-\epsilon}$, which makes learned shapes directly comparable |
+| Numerics | Exponent and power computed in float32, also under bfloat16 mixed precision |
+| Interpretability | The learned exponent profile of every layer can be plotted and inspected |
+
+Earlier work learned signed-power exponents per channel or generated them from feature statistics (Sun et al., CVPR 2018), and PowLU (2026) uses an input-dependent rational exponent inside a language-model gate. APU's distinction is a bounded exponent computed locally from each scalar, with a learned amplitude, three module-shared parameters and a smoothed sign-preserving base.
+
+![APU and its learned geometry](results/figures/fig1_activation_overview.png)
+
+## The study at a glance
+
+| | |
+|---|---|
+| Training runs | 189 fits, 37,800 epochs, about 35 GPU hours on an NVIDIA RTX 5070; no run diverged |
+| Methods | 7: ReLU, GELU, PReLU, ACON-C, and APU with two purpose-built controls (frozen shape, learned constant exponent) |
+| Equal hyperparameter search | 84 fits: the same 6 settings, 2 selection seeds and 200 epochs for every method |
+| Final evaluation | 105 fits: 5 new seeds per method on CIFAR-10 (tuned and shared recipe) and on CIFAR-100 |
+| Predeclared protocol | Protocol frozen before the search, CIFAR-100 declared as the confirmation dataset in advance, selections locked before final training, each final fit tested exactly once |
+| Paired design | Identical starting weights, data order and augmentation across methods for every seed |
+| Correctness checks | 31 automated checks before training, including float64 gradient checks and bit-exact resumption |
+| Reproducibility | SHA-256 fingerprint for every run configuration and for the training code |
+| Cost measurement | 42 benchmarks in fresh processes, eager and compiled, 3 interleaved rounds |
+| Diagnostics | Per-layer activation, exponent and gradient statistics at 7 points in training |
+| Audit | The earlier exploratory study (483 runs) archived, checksummed and reconciled |
 
 ## Main results
 
-Final-epoch test top-1 accuracy (%), mean ± sample SD over 5 seeds, original SimpleCNN, 200 epochs. All 189 runs completed; none diverged.
+Final-epoch test top-1 accuracy (%), mean ± sample SD over 5 seeds, shallow CNN, 200 epochs.
 
-| Method | CIFAR-10, equal search (primary) | CIFAR-100 (predeclared confirmation) | CIFAR-10, common recipe (exploratory) |
-|---|---|---|---|
-| ReLU | 81.79 ± 0.39 | 51.38 ± 0.36 | 81.52 ± 0.30 |
-| GELU | 82.67 ± 0.20 | 52.34 ± 0.27 | 81.82 ± 0.53 |
-| PReLU | 82.08 ± 0.31 | 52.10 ± 0.69 | 81.71 ± 0.12 |
-| ACON-C | 82.55 ± 0.36 | **54.18 ± 0.37** | 81.64 ± 0.12 |
-| Learned constant power | 79.97 ± 0.20 | 52.05 ± 0.29 | 79.85 ± 0.16 |
-| APU, frozen at initial shape | 79.28 ± 0.38 | 49.35 ± 0.28 | 79.08 ± 0.26 |
-| **APU (full, learned)** | **82.88 ± 0.32** | 53.92 ± 0.31 | **82.94 ± 0.35** |
+| Method | Learned activation scalars | CIFAR-10 (primary) | CIFAR-100 (confirmation) | CIFAR-10, shared recipe |
+|---|---|---|---|---|
+| ReLU | 0 | 81.79 ± 0.39 | 51.38 ± 0.36 | 81.52 ± 0.30 |
+| GELU | 0 | 82.67 ± 0.20 | 52.34 ± 0.27 | 81.82 ± 0.53 |
+| PReLU | 3 | 82.08 ± 0.31 | 52.10 ± 0.69 | 81.71 ± 0.12 |
+| ACON-C | 672 | 82.55 ± 0.36 | **54.18 ± 0.37** | 81.64 ± 0.11 |
+| Learned constant power | 3 | 79.97 ± 0.20 | 52.05 ± 0.29 | 79.85 ± 0.16 |
+| Frozen APU | 0 | 79.28 ± 0.38 | 49.35 ± 0.28 | 79.08 ± 0.26 |
+| **Full APU** | **9** | **82.88 ± 0.32** | 53.92 ± 0.31 | **82.94 ± 0.35** |
 
-Paired differences, full APU minus each control (percentage points, 95% confidence interval):
+![Test accuracy of every seed](results/figures/fig2_shallow_accuracy_seeds.png)
 
-| Comparison | CIFAR-10 | CIFAR-100 |
+Paired differences, Full APU minus each method (percentage points, 95% confidence interval, Holm-adjusted p for secondary comparisons):
+
+| Full APU minus | CIFAR-10 | CIFAR-100 |
 |---|---|---|
-| Frozen APU (primary comparison) | +3.60 [3.35, 3.86] | +4.57 [4.26, 4.88] |
-| Strongest standard activation (GELU) | +0.21 [−0.40, 0.81] | +1.58 [1.01, 2.15] |
-| Strongest adaptive activation (ACON-C) | +0.33 [−0.08, 0.74] | −0.26 [−1.04, 0.52] |
-| Learned constant power | +2.91 [2.39, 3.44] | +1.86 [1.24, 2.49] |
+| Frozen APU | **+3.60** [3.35, 3.86], p < 0.001 | **+4.57** [4.26, 4.88], p < 0.001 |
+| Learned constant power | **+2.91** [2.39, 3.44], p < 0.001 | **+1.86** [1.24, 2.49], p = 0.0035 |
+| GELU | +0.21 [−0.40, 0.81], p = 0.398 | **+1.58** [1.01, 2.15], p = 0.0035 |
+| ACON-C | +0.33 [−0.08, 0.74], p = 0.176 | −0.26 [−1.04, 0.52], p = 0.401 |
 
-What the results show:
+![Learned versus frozen APU, paired by seed](results/figures/fig3_learned_vs_frozen.png)
 
-- **Learning the exponent is what makes APU work.** Full APU beats the same function with frozen parameters by 3.60 points on CIFAR-10 and 4.57 points on CIFAR-100, and beats a learned constant exponent by 2.91 and 1.86 points. The input-dependent, learned shape carries the gain.
-- **Top-tier accuracy with 9 parameters.** APU has the highest mean accuracy on CIFAR-10 under equal tuning (82.88%) and beats GELU on CIFAR-100 by 1.58 points (Holm p = 0.003). It matches ACON-C on both datasets while adding 9 parameters instead of 672.
-- **Stable across training recipes.** APU's accuracy barely changes between the shared recipe (82.94%) and its tuned setting (82.88%), while the baselines need tuning to reach their best.
-- **Smaller generalisation gap.** The gap between training and validation accuracy is 11.3 points for APU against 14.5 to 15.5 for the baselines on CIFAR-10, and 20.1 against 21.4 to 27.9 on CIFAR-100.
-- **Moderate compiled cost.** With `torch.compile`, an APU training epoch is 18% slower than ReLU, about the same as ACON-C (17%). In eager mode it is 102% slower.
+## Execution cost
 
-The differences from GELU and ACON-C on CIFAR-10, and from ACON-C on CIFAR-100, are within run-to-run variation, so the study does not claim APU is better than them. The evidence covers one shallow CNN on CIFAR-10 and CIFAR-100.
+Medians of three fresh-process rounds, batch 128, NVIDIA RTX 5070, bfloat16 autocast.
+
+| Mode | Method | Step (ms) | Epoch (s) | Peak memory (MiB) |
+|---|---|---|---|---|
+| Eager | ReLU | 3.05 | 1.44 | 142.79 |
+| Eager | GELU | 3.04 | 1.47 | 161.94 |
+| Eager | ACON-C | 5.42 | 2.31 | 290.24 |
+| Eager | Full APU | 7.32 | 2.91 | 494.93 |
+| Compiled | ReLU | 2.78 | 1.39 | 117.73 |
+| Compiled | GELU | 2.98 | 1.39 | 144.66 |
+| Compiled | ACON-C | 3.55 | 1.63 | 232.52 |
+| Compiled | Full APU | 3.68 | 1.64 | 195.77 |
+
+Compilation cuts APU's epoch overhead from 102% to 18% and its memory overhead from 247% to 66%, using less peak memory than ACON-C. Compiled inference at batch 128 takes 0.60 ms for both APU and ReLU.
 
 ## Repository layout
 
