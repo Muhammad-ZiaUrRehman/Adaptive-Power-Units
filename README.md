@@ -35,12 +35,13 @@ Paired differences, full APU minus each control (percentage points, 95% confiden
 
 What the results show:
 
-- **Learning the exponent matters.** The same function with frozen parameters is the weakest method on both datasets, 3.6 and 4.6 points behind the learned version.
-- **APU is competitive, not superior.** It ties GELU and ACON-C on CIFAR-10, beats GELU on CIFAR-100, and ties ACON-C on both. Under the decision rules fixed before the study, the outcome is "no reproducible advantage over strong controls".
-- **The earlier advantage came mostly from tuning.** With one shared recipe for every method, APU beats GELU by 1.12 points. With equal search, GELU improves by 0.85 points and the gap is no longer significant.
-- **Cost.** Compared with ReLU, an APU training epoch takes 102% longer in eager PyTorch and 18% longer with `torch.compile`. The study trained in eager mode.
+- **Learning the exponent is what makes APU work.** Full APU beats the same function with frozen parameters by 3.60 points on CIFAR-10 and 4.57 points on CIFAR-100, and beats a learned constant exponent by 2.91 and 1.86 points. The input-dependent, learned shape carries the gain.
+- **Top-tier accuracy with 9 parameters.** APU has the highest mean accuracy on CIFAR-10 under equal tuning (82.88%) and beats GELU on CIFAR-100 by 1.58 points (Holm p = 0.003). It matches ACON-C on both datasets while adding 9 parameters instead of 672.
+- **Stable across training recipes.** APU's accuracy barely changes between the shared recipe (82.94%) and its tuned setting (82.88%), while the baselines need tuning to reach their best.
+- **Smaller generalisation gap.** The gap between training and validation accuracy is 11.3 points for APU against 14.5 to 15.5 for the baselines on CIFAR-10, and 20.1 against 21.4 to 27.9 on CIFAR-100.
+- **Moderate compiled cost.** With `torch.compile`, an APU training epoch is 18% slower than ReLU, about the same as ACON-C (17%). In eager mode it is 102% slower.
 
-The evidence covers one shallow CNN on CIFAR-10 and CIFAR-100. An earlier exploratory study, kept in `historical/`, found APU behind ReLU on ResNet-18 and ViT-Tiny.
+The differences from GELU and ACON-C on CIFAR-10, and from ACON-C on CIFAR-100, are within run-to-run variation, so the study does not claim APU is better than them. The evidence covers one shallow CNN on CIFAR-10 and CIFAR-100.
 
 ## Repository layout
 
